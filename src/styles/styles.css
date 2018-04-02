@@ -16,3 +16,10 @@ button {
   background: #4b3832;
   color: #fff4e6;
   font-size: 1.6rem; }
+
+h2 {
+  font-size: 3.2rem;
+  color: black; }
+
+label {
+  font-size: 2.4rem; }

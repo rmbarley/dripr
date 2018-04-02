@@ -1,5 +1,5 @@
-import React from 'react';
+import React from "react";
 
-const BrewerPage = () => <div>This is test markup</div>;
+const BrewerPage = props => <h3>Hello from {props.header}</h3>;
 
 export default BrewerPage;
