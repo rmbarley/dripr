@@ -24,7 +24,7 @@ export default class NewRecipePage extends Component {
         <Grid.Column style={{ maxWidth: 500 }}>
           <Segment stacked>
             <h2>Create a new recipe</h2>
-            <NewRecipeForm brewers={this.props} recipe={this.state.recipe} />
+            <NewRecipeForm addBrewer={this.props.addBrewer} />
           </Segment>
         </Grid.Column>
       </Grid>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
@@ -7,23 +7,116 @@ import NotFoundPage from "./components/NotFoundPage";
 import BrewerPage from "./components/BrewerPage";
 import NewRecipePage from "./components/NewRecipePage";
 
-const Router = props => (
-  <BrowserRouter>
-    <div>
-      <Navbar />
-      <Switch>
-        <Route path="/" component={App} exact />
-        <Route
-          path="/recipe/:name"
-          render={routeProps => (
-            <BrewerPage routeProps={routeProps} {...props} />
-          )}
-        />
-        <Route path="/new" component={NewRecipePage} />
-        <Route component={NotFoundPage} />
-      </Switch>
-    </div>
-  </BrowserRouter>
-);
+class Router extends Component {
+  state = {
+    brewers: [
+      {
+        image: "/images/chemex.png",
+        header: "Chemex",
+        description:
+          "Glass carafe. Enhanced clarity and sweetness. More forgiving.",
+        routeName: "recipe/chemex",
+        recipe: {
+          grindSize: "fine",
+          bloom: 45,
+          brewTime: 360,
+          description: "lorem ipsum etc."
+        }
+      },
+      {
+        image: "/images/v60.png",
+        header: "Hario V60",
+        description:
+          "Ceramic cone dripper. Versatile and fast. Bright and crisp.",
+        routeName: "recipe/v60",
+        recipe: {
+          grindSize: "fine",
+          bloom: 45,
+          brewTime: 360,
+          description: "lorem ipsum etc."
+        }
+      },
+      {
+        image: "/images/aeropress.png",
+        header: "Aeropress",
+        description:
+          "Extremely portable with a small footprint. Very fast full immersion brewer. ",
+        routeName: "recipe/aeropress",
+        recipe: {
+          grindSize: "fine",
+          bloom: 45,
+          brewTime: 360,
+          description: "lorem ipsum etc."
+        }
+      },
+      {
+        image: "/images/frenchpress.png",
+        header: "French Press",
+        description: "Classic full immersion brewer. Strong and clean. ",
+        routeName: "recipe/frenchpress",
+        recipe: {
+          grindSize: "fine",
+          bloom: 45,
+          brewTime: 360,
+          description: "lorem ipsum etc."
+        }
+      },
+      {
+        image: "/images/custom.png",
+        header: "Custom",
+        description: "Know what you like? Set your own custom timers. ",
+        routeName: "recipe/custom",
+        recipe: {
+          grindSize: "fine",
+          bloom: 45,
+          brewTime: 360,
+          description: "lorem ipsum etc."
+        }
+      },
+      {
+        image: "/images/new.png",
+        header: "New Recipe",
+        description: "Save a new recipe.",
+        routeName: "new",
+        recipe: {
+          grindSize: "fine",
+          bloom: 45,
+          brewTime: 360,
+          description: "lorem ipsum etc."
+        }
+      }
+    ]
+  };
+  addBrewer = brewer => {
+    console.log(brewer);
+    const brewers = [...this.state.brewers, brewer];
+    this.setState({ brewers });
+  };
+  render() {
+    return (
+      <BrowserRouter>
+        <div>
+          <Navbar />
+          <Switch>
+            <Route
+              path="/"
+              render={() => <App brewers={this.state.brewers} />}
+              exact
+            />
+            <Route
+              path="/recipe/:name"
+              render={() => <BrewerPage brewers={this.state.brewers} />}
+            />
+            <Route
+              path="/new"
+              render={() => <NewRecipePage addBrewer={this.addBrewer} />}
+            />
+            <Route component={NotFoundPage} />
+          </Switch>
+        </div>
+      </BrowserRouter>
+    );
+  }
+}
 
 export default Router;
