@@ -105,7 +105,9 @@ class Router extends Component {
             />
             <Route
               path="/recipe/:name"
-              render={() => <BrewerPage brewers={this.state.brewers} />}
+              render={props => (
+                <BrewerPage {...props} data={this.state.brewers} />
+              )}
             />
             <Route
               path="/new"
