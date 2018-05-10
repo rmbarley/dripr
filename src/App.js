@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import { Route, Redirect, Switch } from "react-router-dom";
 
 import Layout from "./hoc/Layout/Layout";
 import RecipeList from "./components/RecipeList/RecipeList";
@@ -84,20 +84,23 @@ class App extends Component {
     return (
       <div className="App">
         <Layout>
-          <Route path="/new" component={NewRecipePage} />
-          <Route
-            path="/recipe/:name"
-            render={props => (
-              <BrewerPage data={this.state.recipes} {...props} />
-            )}
-          />
-          <Route
-            path="/"
-            render={props => (
-              <RecipeList recipes={this.state.recipes} {...props} />
-            )}
-            exact
-          />
+          <Switch>
+            <Route path="/new" component={NewRecipePage} />
+            <Route
+              path="/recipe/:name"
+              render={props => (
+                <BrewerPage data={this.state.recipes} {...props} />
+              )}
+            />
+            <Route
+              path="/"
+              render={props => (
+                <RecipeList recipes={this.state.recipes} {...props} />
+              )}
+              exact
+            />
+            <Redirect to="/" />
+          </Switch>
         </Layout>
       </div>
     );

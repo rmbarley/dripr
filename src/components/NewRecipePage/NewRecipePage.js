@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Grid, Segment } from "semantic-ui-react";
 import NewRecipeForm from "./NewRecipeForm/NewRecipeForm.js";
-import PropTypes from "prop-types";
 
 export default class NewRecipePage extends Component {
   static propTypes = {};
