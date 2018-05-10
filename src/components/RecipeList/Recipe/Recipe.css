@@ -1,0 +1,15 @@
+.Recipe {
+  width: 400px;
+  height: auto;
+  margin-bottom: 35px;
+  color: #4b3832;
+  background-color: #fff4e6;
+  border-radius: 4px;
+  box-shadow: 2px 3px #444;
+}
+
+.Recipe img {
+  width: 100%;
+  height: auto;
+  background-color: white;
+}

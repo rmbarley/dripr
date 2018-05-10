@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import classes from "./Clock.css";
+
 class Clock extends Component {
   totalTime = this.props.brewTime + this.props.bloomTime;
   constructor(props) {
@@ -35,10 +37,10 @@ class Clock extends Component {
       this.state.timeLeft >= this.props.brewTime ? "Bloom" : "Pourover";
     return (
       <div
-        className="clock"
+        className={classes.Clock}
         onClick={isRunning ? this.stopTimer : this.startTimer}
       >
-        <h2 className="clock--header">
+        <h2>
           {!isRunning && this.totalTime > this.state.timeLeft
             ? "Paused"
             : display}

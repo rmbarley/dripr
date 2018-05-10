@@ -1,21 +1,20 @@
 import React from "react";
-import { Container, Header } from "semantic-ui-react";
-import Clock from "./Clock";
+import Clock from "../Clock/Clock";
 
 const BrewerPage = ({ match, data }) => {
-  const brewer = data.find(d => `/${d.routeName}` === match.url);
+  const recipe = data.find(
+    d => `/recipe/${d.title.toLowerCase()}` === match.url
+  );
   return (
-    <Container textAlign="center">
-      <Header as="h2" size={"huge"}>
-        {brewer.header}
-      </Header>
-      <p>{brewer.description}</p>
-      <p>Grind Size: {brewer.recipe.grindSize}</p>
+    <div>
+      <h2>{recipe.title}</h2>
+      <p>{recipe.description}</p>
+      <p>Grind Size: {recipe.recipe.grindSize}</p>
       <Clock
-        bloomTime={brewer.recipe.bloom}
-        brewTime={brewer.recipe.brewTime}
+        bloomTime={recipe.recipe.bloom}
+        brewTime={recipe.recipe.brewTime}
       />
-    </Container>
+    </div>
   );
 };
 export default BrewerPage;
