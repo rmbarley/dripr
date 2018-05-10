@@ -1,40 +1,42 @@
 import React, { Component } from "react";
-import { Form, Button } from "semantic-ui-react";
+import { Dropdown, Form, Button } from "semantic-ui-react";
+import { withRouter } from "react-router-dom";
 
-export default class NewRecipeForm extends Component {
-  // createRecipe = e => {
-  //   e.preventDefault();
-  //   console.log(e);
-
+const options = [
+  { key: "1", text: "Fine", value: "Fine" },
+  { key: "2", text: "Medium-Fine", value: "Medium-Fine" },
+  { key: "3", text: "Medium", value: "Medium" },
+  { key: "4", text: "Medium-Coarse", value: "Medium-Coarse" },
+  { key: "5", text: "Coarse", value: "Coarse" }
+];
+class NewRecipeForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: {
-        title: "",
-        bloom: 0,
-        totalTime: 0,
-        description: ""
-      }
+      title: "",
+      grindSize: "",
+      bloom: 0,
+      totalTime: 0,
+      recipeText: ""
     };
   }
-  handleInputChange = e => {
-    this.setState({
-      ...this.state,
-      data: { ...this.state.data, [e.target.name]: e.target.value }
-    });
+
+  handleInputChange = (e, { name, value }) => {
+    this.setState({ [name]: value });
   };
   createBrewer = e => {
     e.preventDefault();
     console.log(e);
     const brewer = {
       image: "/images/custom.png",
-      header: this.state.data.title,
+      header: this.state.title,
       description:
         "Glass carafe. Enhanced clarity and sweetness. More forgiving.",
-      routeName: `recipe/${this.state.data.title.toLowerCase()}`,
-      recipe: this.state.data
+      routeName: `recipe/${this.state.title.toLowerCase()}`,
+      recipe: this.state
     };
     this.props.addBrewer(brewer);
+    this.props.history.push("/");
   };
   render() {
     return (
@@ -46,9 +48,24 @@ export default class NewRecipeForm extends Component {
             name="title"
             placeholder="Title"
             type="text"
-            value={this.state.data.title}
+            value={this.state.title}
             onChange={this.handleInputChange}
           />
+          <p>current value: {this.state.title}</p>
+        </Form.Field>
+        <Form.Field>
+          <Dropdown
+            fluid
+            selection
+            placeholder="Grind Size"
+            label="Grind Size"
+            options={options}
+            id="grindSize"
+            name="grindSize"
+            value={this.state.grindSize}
+            onChange={this.handleInputChange}
+          />
+          <p>current value: {this.state.grindSize}</p>
         </Form.Field>
         <Form.Field>
           <label htmlFor="bloom">Bloom Time</label>
@@ -56,7 +73,7 @@ export default class NewRecipeForm extends Component {
             id="bloom"
             name="bloom"
             type="number"
-            value={this.state.data.bloom}
+            value={this.state.bloom}
             onChange={this.handleInputChange}
           />
         </Form.Field>
@@ -66,16 +83,17 @@ export default class NewRecipeForm extends Component {
             id="totalTime"
             name="totalTime"
             type="number"
-            value={this.state.data.totalTime}
+            value={this.state.totalTime}
             onChange={this.handleInputChange}
           />
+          <p>current value: {this.state.totalTime}</p>
         </Form.Field>
         <Form.Field>
-          <label htmlFor="description">Description</label>
-          <textarea
-            id="description"
-            name="description"
-            value={this.state.data.description}
+          <label htmlFor="recipeText">Description</label>
+          <Form.TextArea
+            id="Recipe Text"
+            name="recipeText"
+            value={this.state.recipeText}
             onChange={this.handleInputChange}
           />
         </Form.Field>
@@ -86,3 +104,5 @@ export default class NewRecipeForm extends Component {
     );
   }
 }
+
+export default withRouter(NewRecipeForm);
