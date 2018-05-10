@@ -1,28 +1,16 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Image, Menu } from 'semantic-ui-react';
-import logo from '../images/dripr.png';
+import React from "react";
+import Logo from "../Logo/Logo";
+import NavItems from "./NavItems/NavItems";
+
+import classes from "./Navbar.css";
 
 const Navbar = () => (
-  <Menu style={{ background: '#4b3832' }}>
-    <Menu.Item
-      as="a"
-      header
-      position="left"
-      style={{ color: '#fff4e6', fontSize: '2.8rem' }}
-    >
-      <Image size="tiny" src={logo} style={{ marginRight: '1.5rem' }} />
-      Dripr
-    </Menu.Item>
-    <Menu.Item
-      as={Link}
-      to="/"
-      position="right"
-      style={{ color: '#fff4e6', fontSize: '2.8rem' }}
-    >
-      Home
-    </Menu.Item>
-  </Menu>
+  <header className={classes.Navbar}>
+    <Logo />
+    <nav className={classes.DesktopOnly}>
+      <NavItems />
+    </nav>
+  </header>
 );
 
 export default Navbar;

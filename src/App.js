@@ -1,15 +1,16 @@
 import React, { Component } from "react";
-import BrewerCard from "./BrewerCard";
-import base from "../base";
+import Navbar from "./components/Navbar/Navbar";
+import Layout from "./hoc/Layout/Layout";
+// import BrewerCard from "./BrewerCard";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <BrewerCard
-          brewers={this.props.brewers}
-          addRecipe={this.props.addRecipe}
-        />
+        <Layout>
+          <Navbar />
+          Hello
+        </Layout>
       </div>
     );
   }

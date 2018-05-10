@@ -1,10 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Router from './Router';
-import registerServiceWorker from './registerServiceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
 
-import 'semantic-ui-css/semantic.min.css';
-import './styles/styles.css';
+import App from "./App";
+import "./index.css";
 
-ReactDOM.render(<Router />, document.getElementById('root'));
+import registerServiceWorker from "./registerServiceWorker";
+
+const app = (
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);
+ReactDOM.render(app, document.getElementById("root"));
 registerServiceWorker();
