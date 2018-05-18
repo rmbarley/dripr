@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Dropdown, Form, Button } from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
-
+import classes from "./NewRecipeForm.css";
 const options = [
   { key: "1", text: "Fine", value: "Fine" },
   { key: "2", text: "Medium-Fine", value: "Medium-Fine" },
@@ -9,98 +8,95 @@ const options = [
   { key: "4", text: "Medium-Coarse", value: "Medium-Coarse" },
   { key: "5", text: "Coarse", value: "Coarse" }
 ];
+
 class NewRecipeForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "",
-      grindSize: "",
-      bloom: 0,
-      totalTime: 0,
-      recipeText: ""
+      recipe: {
+        title: "",
+        grindSize: "",
+        bloom: 0,
+        totalTime: 0,
+        recipeText: ""
+      }
     };
   }
-
-  handleInputChange = (e, { name, value }) => {
-    this.setState({ [name]: value });
+  handleInputChange = e => {
+    this.setState({
+      recipe: {
+        ...this.state.recipe,
+        [e.target.name]: e.target.value
+      }
+    });
   };
   createBrewer = e => {
     e.preventDefault();
     console.log(e);
     const brewer = {
       image: "/images/custom.png",
-      header: this.state.title,
+      title: this.state.recipe.title,
       description:
         "Glass carafe. Enhanced clarity and sweetness. More forgiving.",
-      routeName: `recipe/${this.state.title.toLowerCase()}`,
-      recipe: this.state
+      routeName: `recipe/${this.state.recipe.title.toLowerCase()}`,
+      recipe: this.state.recipe
     };
     this.props.addBrewer(brewer);
     this.props.history.push("/");
   };
   render() {
     return (
-      <Form size="large" onSubmit={this.createBrewer}>
-        <Form.Field>
-          <label htmlFor="title">Title:</label>
-          <Form.Input
-            id="title"
-            name="title"
-            placeholder="Title"
-            type="text"
-            value={this.state.title}
-            onChange={this.handleInputChange}
-          />
-          <p>current value: {this.state.title}</p>
-        </Form.Field>
-        <Form.Field>
-          <Dropdown
-            fluid
-            selection
-            placeholder="Grind Size"
-            label="Grind Size"
-            options={options}
-            id="grindSize"
-            name="grindSize"
-            value={this.state.grindSize}
-            onChange={this.handleInputChange}
-          />
-          <p>current value: {this.state.grindSize}</p>
-        </Form.Field>
-        <Form.Field>
-          <label htmlFor="bloom">Bloom Time</label>
-          <Form.Input
-            id="bloom"
-            name="bloom"
-            type="number"
-            value={this.state.bloom}
-            onChange={this.handleInputChange}
-          />
-        </Form.Field>
-        <Form.Field>
-          <label htmlFor="totalTime">Total Time</label>
-          <Form.Input
-            id="totalTime"
-            name="totalTime"
-            type="number"
-            value={this.state.totalTime}
-            onChange={this.handleInputChange}
-          />
-          <p>current value: {this.state.totalTime}</p>
-        </Form.Field>
-        <Form.Field>
-          <label htmlFor="recipeText">Description</label>
-          <Form.TextArea
-            id="Recipe Text"
-            name="recipeText"
-            value={this.state.recipeText}
-            onChange={this.handleInputChange}
-          />
-        </Form.Field>
-        <Button primary fluid size="large">
-          Save
-        </Button>
-      </Form>
+      <form onSubmit={this.createBrewer} className={classes.NewRecipeForm}>
+        <label htmlFor="title">Title:</label>
+        <input
+          id="title"
+          name="title"
+          placeholder="Title"
+          type="text"
+          value={this.state.recipe.title}
+          onChange={this.handleInputChange}
+        />
+        <label htmlFor="grindsize">Grind Size</label>
+        <select
+          placeholder="Grind Size"
+          label="Grind Size"
+          options={options}
+          id="grindSize"
+          name="grindSize"
+          value={this.state.recipe.grindSize}
+          onChange={this.handleInputChange}
+        >
+          {options.map(option => (
+            <option key={option.key} value={option.value}>
+              {option.text}
+            </option>
+          ))}
+        </select>
+        <label htmlFor="bloom">Bloom Time (seconds)</label>
+        <input
+          id="bloom"
+          name="bloom"
+          type="number"
+          value={this.state.recipe.bloom}
+          onChange={this.handleInputChange}
+        />
+        <label htmlFor="totalTime">Total Time (seconds)</label>
+        <input
+          id="totalTime"
+          name="totalTime"
+          type="number"
+          value={this.state.recipe.totalTime}
+          onChange={this.handleInputChange}
+        />
+        <label htmlFor="recipeText">Description</label>
+        <textarea
+          id="Recipe Text"
+          name="recipeText"
+          value={this.state.recipe.recipeText}
+          onChange={this.handleInputChange}
+        />
+        <button>Save</button>
+      </form>
     );
   }
 }

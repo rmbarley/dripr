@@ -1,0 +1,51 @@
+.NewRecipeForm {
+  margin: 20px auto;
+  width: 50%;
+  text-align: center;
+  box-shadow: 0 2px 3px #ccc;
+  border: 1px solid #eee;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* .NewRecipeForm input {
+  width: 50%;
+  padding: 10px;
+  box-sizing: border-box;
+} */
+
+.NewRecipeForm label {
+  margin-top: 100px;
+}
+
+.NewRecipeForm input,
+.NewRecipeForm select,
+.NewRecipeForm textarea {
+  margin: 8px auto;
+  outline: none;
+  border: 1px solid #ccc;
+  background-color: white;
+  font: inherit;
+  padding: 10px 10px;
+  display: flex;
+  flex-direction: column;
+  width: 67%;
+  box-sizing: border-box;
+}
+
+.NewRecipeForm textarea {
+  height: 100px;
+}
+
+.NewRecipeForm input:focus,
+.NewRecipeForm select:focus,
+.NewRecipeForm textarea:focus {
+  outline: none;
+  background-color: #ccc;
+}
+
+@media (min-width: 600px) {
+  .ContactForm {
+    width: 500px;
+  }
+}

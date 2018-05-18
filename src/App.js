@@ -80,12 +80,19 @@ class App extends Component {
       }
     ]
   };
+  addBrewer = brewer => {
+    const recipes = [...this.state.recipes, brewer];
+    this.setState({ recipes });
+  };
   render() {
     return (
       <div className="App">
         <Layout>
           <Switch>
-            <Route path="/new" component={NewRecipePage} />
+            <Route
+              path="/new"
+              render={() => <NewRecipePage addBrewer={this.addBrewer} />}
+            />
             <Route
               path="/recipe/:name"
               render={props => (
