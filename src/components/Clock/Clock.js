@@ -16,6 +16,13 @@ class Clock extends Component {
       timeLeft: prevState.timeLeft - 1
     }));
   }
+  formatTime = time => {
+    let minutes = Math.floor(time / 60);
+    let seconds = time % 60;
+    return `${minutes >= 10 ? minutes : "0" + minutes}:${
+      seconds >= 10 ? seconds : "0" + seconds
+    }`;
+  };
   startTimer = () => {
     this.timerID = setInterval(() => this.tick(), 1000);
     this.setState({
@@ -40,12 +47,12 @@ class Clock extends Component {
         className={classes.Clock}
         onClick={isRunning ? this.stopTimer : this.startTimer}
       >
-        <h2>
+        <h3>
           {!isRunning && this.totalTime > this.state.timeLeft
             ? "Paused"
             : display}
-        </h2>
-        <h3>{this.state.timeLeft}</h3>
+        </h3>
+        <h3>{this.formatTime(this.state.timeLeft)}</h3>
       </div>
     );
   }

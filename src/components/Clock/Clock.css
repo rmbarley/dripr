@@ -1,11 +1,16 @@
 .Clock {
   align-items: center;
   background-color: none;
-  border: 20px solid #3c2f2f;
+  border: 30px solid #3c2f2f;
   border-radius: 50%;
   display: flex;
-  height: 20rem;
-  width: 20rem;
+  flex-direction: column;
+  height: 300px;
+  width: 300px;
   justify-content: center;
-  margin: 4rem auto;
+  margin: 6rem auto;
+}
+
+.Clock>h2 {
+  font-size: 1.6rem;
 }
